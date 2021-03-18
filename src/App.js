@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import Clock from './Clock';
+import Market from './Market';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = { showClock: false, showMarket: false }
+
+  toggleClock = () => {
+    const { showClock } = this.state 
+    this.setState({ showClock: !showClock })
+  }
+  
+  toggleMarket = () => {
+    const { showMarket } = this.state 
+    this.setState({ showMarket: !showMarket })
+  }
+
+  render() {
+    const { showClock, showMarket } = this.state
+    return (
+      <>
+        { showClock && <Clock /> }
+        <button onClick={this.toggleClock}>
+          Toggle Clock
+        </button>
+        { showMarket && <Market /> }
+        <button onClick={this.toggleMarket}>
+          Toggle Market
+        </button>
+      </>
+    )
+  }
 }
 
 export default App;
